@@ -114,6 +114,50 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .rank-score {
     font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 18px;
 }
+
+.point-list { margin: 0; padding-left: 18px; }
+.point-list li {
+    color: #374B53 !important;
+    font-size: 14px; line-height: 1.75; margin-bottom: 2px;
+}
+.rec-text { color: #374B53 !important; font-size: 14.5px; line-height: 1.6; margin: 0; }
+
+/* --- Force readable text regardless of the viewer's light/dark theme --- */
+.stApp, .stApp p, .stApp li, .stApp span, .stApp label,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+.stApp [data-testid="stMarkdownContainer"],
+.stApp [data-testid="stMarkdownContainer"] p,
+.stApp [data-testid="stMarkdownContainer"] li,
+.stApp [data-testid="stMarkdownContainer"] strong {
+    color: #12303A !important;
+}
+
+/* Bordered containers (the candidate cards) stay white */
+.stApp [data-testid="stVerticalBlockBorderWrapper"] {
+    background: #FFFFFF;
+    border-radius: 14px;
+}
+
+/* Tab labels */
+.stApp [data-testid="stTabs"] button p { color: #55676E; }
+.stApp [data-testid="stTabs"] button[aria-selected="true"] p { color: #0E7C6B; }
+
+/* Sidebar */
+.stApp [data-testid="stSidebar"] { background: #FFFFFF; }
+.stApp [data-testid="stSidebar"] * { color: #12303A !important; }
+
+/* Keep our own coloured elements from being overridden by the rule above */
+.stApp .chip-match { color: #0B5F52; }
+.stApp .chip-gap   { color: #9A3412; }
+.stApp .stamp-hire  { color: #0E7C6B; }
+.stApp .stamp-maybe { color: #B07908; }
+.stApp .stamp-pass  { color: #C2410C; }
+.stApp .sec-label  { color: #8A9AA1; }
+.stApp .cand-file  { color: #8A9AA1; }
+.stApp .rank-num   { color: #8A9AA1; }
+.stApp .rationale  { color: #55676E; }
+.stApp .hero p     { color: #55676E; }
+.stApp .summary-text { color: #374B53; }
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
@@ -156,6 +200,14 @@ def stamp_html(verdict):
     else:
         cls = "stamp-pass"
     return f'<span class="stamp {cls}">{verdict}</span>'
+
+
+def bullets(items):
+    """Render a list as HTML so the text colour never depends on the theme."""
+    if not items:
+        return '<p class="rec-text">None identified</p>'
+    lis = "".join(f"<li>{i}</li>" for i in items)
+    return f'<ul class="point-list">{lis}</ul>'
 
 
 def chips(items, kind):
@@ -433,15 +485,13 @@ if "evaluations" in st.session_state and st.session_state.evaluations:
                 c3, c4 = st.columns(2)
                 with c3:
                     st.markdown('<div class="sec-label">Strengths</div>', unsafe_allow_html=True)
-                    for s in ev.strengths:
-                        st.markdown("- " + s)
+                    st.markdown(bullets(ev.strengths), unsafe_allow_html=True)
                 with c4:
                     st.markdown('<div class="sec-label">Weaknesses</div>', unsafe_allow_html=True)
-                    for s in ev.weaknesses:
-                        st.markdown("- " + s)
+                    st.markdown(bullets(ev.weaknesses), unsafe_allow_html=True)
 
                 st.markdown('<div class="sec-label">Recommendation</div>', unsafe_allow_html=True)
-                st.markdown(ev.recommendation)
+                st.markdown(f'<p class="rec-text">{ev.recommendation}</p>', unsafe_allow_html=True)
 
     # ---------- Tab 2: compare two ----------
     with tab2:
