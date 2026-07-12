@@ -272,6 +272,62 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     background-color: #FFFFFF !important;
 }
 .stApp [data-testid="stTextInputRootElement"] { border-color: #D8D4C8 !important; }
+
+/* ================= NUCLEAR LIGHT-MODE OVERRIDE ================= */
+/* Override Streamlit's own theme variables at the root */
+:root, .stApp, [data-testid="stAppViewContainer"] {
+    color-scheme: light !important;
+    --background-color: #FCFBF8 !important;
+    --secondary-background-color: #FFFFFF !important;
+    --text-color: #12303A !important;
+    --primary-color: #0E7C6B !important;
+}
+
+/* Every descendant of a select, input, or uploaded-file chip: white bg, dark text */
+.stApp [data-baseweb="select"] *,
+.stApp [data-baseweb="input"] *,
+.stApp [data-baseweb="base-input"] *,
+.stApp [data-testid="stTextInputRootElement"] *,
+.stApp [data-testid="stNumberInputContainer"] *,
+.stApp [data-testid="stFileUploaderFile"] *,
+.stApp [data-testid="stFileUploaderFileName"],
+.stApp [data-baseweb="tag"] * {
+    background-color: #FFFFFF !important;
+    color: #12303A !important;
+    -webkit-text-fill-color: #12303A !important;
+    border-color: #D8D4C8 !important;
+}
+
+/* uploaded-file chips get a soft tint so they read as chips */
+.stApp [data-testid="stFileUploaderFile"] {
+    background-color: #F3F0E9 !important;
+    border-radius: 8px !important;
+}
+.stApp [data-testid="stFileUploaderFile"] * {
+    background-color: transparent !important;
+}
+
+/* re-colour the icons after the blanket rule above */
+.stApp [data-baseweb="select"] svg,
+.stApp [data-baseweb="input"] svg,
+.stApp [data-testid="stTextInputRootElement"] svg {
+    fill: #55676E !important;
+    color: #55676E !important;
+    background-color: transparent !important;
+}
+.stApp [data-testid="stFileUploaderFile"] svg {
+    fill: #0E7C6B !important;
+    color: #0E7C6B !important;
+    background-color: transparent !important;
+}
+.stApp [data-testid="stFileUploaderDeleteBtn"] svg { fill: #8A9AA1 !important; }
+
+/* multiselect / tag pills */
+.stApp [data-baseweb="tag"] {
+    background-color: #E4F2EE !important;
+    border: 1px solid #BFE0D8 !important;
+}
+.stApp [data-baseweb="tag"] span { color: #0B5F52 !important; }
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
