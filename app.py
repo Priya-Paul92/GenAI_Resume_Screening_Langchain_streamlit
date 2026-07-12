@@ -158,6 +158,89 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .stApp .rationale  { color: #55676E; }
 .stApp .hero p     { color: #55676E; }
 .stApp .summary-text { color: #374B53; }
+
+/* ---------- Force LIGHT widgets even if the viewer is in dark mode ---------- */
+
+/* text inputs, textareas */
+.stApp input, .stApp textarea {
+    background-color: #FFFFFF !important;
+    color: #12303A !important;
+    -webkit-text-fill-color: #12303A !important;
+}
+.stApp [data-baseweb="input"],
+.stApp [data-baseweb="textarea"],
+.stApp [data-baseweb="base-input"] {
+    background-color: #FFFFFF !important;
+    border-color: #D8D4C8 !important;
+}
+
+/* select / dropdown (closed state) */
+.stApp [data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    border-color: #D8D4C8 !important;
+    color: #12303A !important;
+}
+.stApp [data-baseweb="select"] div { color: #12303A !important; }
+.stApp [data-baseweb="select"] svg { fill: #55676E !important; }
+
+/* dropdown menu (open state) */
+[data-baseweb="popover"] [role="listbox"],
+[data-baseweb="popover"] ul,
+[data-baseweb="menu"] {
+    background-color: #FFFFFF !important;
+}
+[data-baseweb="popover"] li,
+[data-baseweb="menu"] li {
+    background-color: #FFFFFF !important;
+    color: #12303A !important;
+}
+[data-baseweb="popover"] li:hover,
+[data-baseweb="menu"] li:hover { background-color: #E4F2EE !important; }
+
+/* file uploader */
+.stApp [data-testid="stFileUploaderDropzone"] {
+    background-color: #FFFFFF !important;
+    border: 1px dashed #C9C4B6 !important;
+}
+.stApp [data-testid="stFileUploaderDropzone"] * { color: #12303A !important; }
+.stApp [data-testid="stFileUploaderFile"] { background-color: #F5F2EB !important; }
+.stApp [data-testid="stFileUploaderFile"] * { color: #12303A !important; }
+
+/* buttons */
+.stApp .stButton > button {
+    background-color: #FFFFFF !important;
+    color: #12303A !important;
+    border: 1px solid #D8D4C8 !important;
+}
+.stApp .stButton > button:hover {
+    border-color: #0E7C6B !important;
+    color: #0E7C6B !important;
+}
+.stApp .stButton > button[kind="primary"],
+.stApp .stButton > button[kind="primaryFormSubmit"] {
+    background-color: #0E7C6B !important;
+    border: none !important;
+}
+.stApp .stButton > button[kind="primary"] *,
+.stApp .stButton > button[kind="primaryFormSubmit"] * {
+    color: #FFFFFF !important;
+}
+
+/* alert boxes (st.info / st.success / st.warning / st.error) */
+.stApp [data-testid="stAlert"] { background-color: #FFFFFF !important; border: 1px solid #E2E0D8 !important; }
+.stApp [data-testid="stAlert"] * { color: #12303A !important; }
+
+/* expander + captions + code */
+.stApp [data-testid="stExpander"] { background-color: #FFFFFF !important; }
+.stApp [data-testid="stExpander"] * { color: #12303A !important; }
+.stApp [data-testid="stCaptionContainer"] * { color: #55676E !important; }
+.stApp code { background-color: #F1EEE7 !important; color: #0B5F52 !important; }
+
+/* progress bar */
+.stApp [data-testid="stProgress"] > div > div > div > div { background-color: #0E7C6B !important; }
+
+/* tabs underline */
+.stApp [data-testid="stTabs"] [aria-selected="true"] { border-bottom-color: #0E7C6B !important; }
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
