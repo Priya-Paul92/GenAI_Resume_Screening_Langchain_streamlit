@@ -36,9 +36,11 @@ CSS = """
 
 .stApp {
     background:
-        radial-gradient(1100px 600px at 8% 0%, #DCEFE9 0%, rgba(220,239,233,0) 55%),
-        radial-gradient(900px 600px at 95% 8%, #E7E2F2 0%, rgba(231,226,242,0) 55%),
-        linear-gradient(160deg, #F5F2EB 0%, #EFF3F1 55%, #F3EFE8 100%);
+        radial-gradient(1200px 700px at 3% -8%, #C8F0E2 0%, rgba(200,240,226,0) 58%),
+        radial-gradient(1000px 700px at 100% -2%, #E2DBFB 0%, rgba(226,219,251,0) 58%),
+        radial-gradient(900px 600px at 60% 105%, #FFEFD6 0%, rgba(255,239,214,0) 60%),
+        linear-gradient(160deg, #FCFBF8 0%, #F3FBF8 50%, #FDF9F3 100%);
+    background-attachment: fixed;
 }
 
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
@@ -241,6 +243,35 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 
 /* tabs underline */
 .stApp [data-testid="stTabs"] [aria-selected="true"] { border-bottom-color: #0E7C6B !important; }
+
+/* ---------- Streamlit top header / toolbar ---------- */
+.stApp [data-testid="stHeader"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.stApp [data-testid="stHeader"] * { color: #12303A !important; fill: #12303A !important; }
+.stApp [data-testid="stToolbar"] { background: transparent !important; }
+.stApp [data-testid="stDecoration"] { display: none !important; }
+
+/* ---------- kill the dark strips inside inputs / selects ---------- */
+.stApp [data-baseweb="select"] > div,
+.stApp [data-baseweb="select"] > div > div,
+.stApp [data-baseweb="select"] > div > div > div,
+.stApp [data-baseweb="input"] > div,
+.stApp [data-baseweb="input"] > div > div,
+.stApp [data-baseweb="base-input"],
+.stApp [data-baseweb="base-input"] > div {
+    background-color: #FFFFFF !important;
+}
+.stApp [data-baseweb="select"] svg,
+.stApp [data-baseweb="input"] svg { fill: #55676E !important; color: #55676E !important; }
+
+/* the show/hide-password eye button */
+.stApp [data-testid="stTextInputRootElement"] button,
+.stApp [data-testid="stTextInputRootElement"] > div {
+    background-color: #FFFFFF !important;
+}
+.stApp [data-testid="stTextInputRootElement"] { border-color: #D8D4C8 !important; }
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
